@@ -7,9 +7,11 @@ namespace RestaurantBookings
         private string v;
         private string selectedTime;
 
-        public PersonalBookingPage()
+        public PersonalBookingPage(string v = null, string selectedTime = null)
         {
             InitializeComponent();
+            BookingDateLabel.Text = v ?? "No booking made.";
+            BookingTimeLabel.Text = selectedTime ?? string.Empty;
 
             // Retrieve booking details from MainPage
             var mainPage = Application.Current.MainPage as NavigationPage;

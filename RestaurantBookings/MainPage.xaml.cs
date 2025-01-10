@@ -62,5 +62,14 @@ namespace RestaurantBookings
                 selectedTime
             ));
         }
+        private async void OnViewBookingsClicked(object sender, EventArgs e)
+        {
+            // Navigate to the PersonalBookingPage to view bookings
+            await Navigation.PushAsync(new PersonalBookingPage(
+                SelectedDate.ToShortDateString(),
+                TimeOptions[SelectedTimeIndex]
+            ));
+        }
+
     }
 }
