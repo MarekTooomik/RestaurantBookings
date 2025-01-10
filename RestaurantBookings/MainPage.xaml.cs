@@ -4,7 +4,6 @@ namespace RestaurantBookings
 {
     public partial class MainPage : ContentPage
     {
-
         public DateTime SelectedDate { get; set; }
         public int SelectedTimeIndex { get; set; }
         public List<string> TimeOptions { get; set; }
@@ -12,10 +11,15 @@ namespace RestaurantBookings
         public MainPage()
         {
             InitializeComponent();
-            SelectedDate = DateTime.Now.Date;  
-            SelectedTimeIndex = 0; 
+
+            // Initialize properties
+            SelectedDate = DateTime.Now.Date;
+            SelectedTimeIndex = 0;
+
             // Generate available time options in 30-minute intervals from 08:00 to 22:00
             TimeOptions = GenerateTimeOptions();
+
+            // Bind the page's context to itself
             this.BindingContext = this;
         }
 
@@ -24,7 +28,7 @@ namespace RestaurantBookings
         {
             List<string> options = new List<string>();
             DateTime startTime = DateTime.Today.AddHours(8);
-            DateTime endTime = DateTime.Today.AddHours(22); 
+            DateTime endTime = DateTime.Today.AddHours(22);
 
             while (startTime <= endTime)
             {
@@ -37,24 +41,26 @@ namespace RestaurantBookings
 
         private void OnDateChanged(object sender, DateChangedEventArgs e)
         {
-            SelectedDate = e.NewDate; 
+            SelectedDate = e.NewDate; // Update the SelectedDate property when the user picks a date
         }
+
         private async void OnBookClicked(object sender, EventArgs e)
         {
-            // Get the selected time from your TimeOptions array (or picker)
+            // Get the selected time
             string selectedTime = TimeOptions[SelectedTimeIndex];
 
             // Display a confirmation alert
-            await DisplayAlert("Booking Confirmed",
+            await DisplayAlert(
+                "Booking Confirmed",
                 $"Your booking for {SelectedDate.ToShortDateString()} at {selectedTime} is confirmed.",
-                "OK");
+                "OK"
+            );
 
-            // Navigate to the PersonalBookingPage and pass the booking details
-            string selectedDate = DatePicker.Date.ToString("d");
-            await Navigation.PushAsync(new PersonalBookingPage(selectedDate, selectedTime));
-
+            // Navigate to the PersonalBookingPage with booking details
+            await Navigation.PushAsync(new PersonalBookingPage(
+                SelectedDate.ToShortDateString(),
+                selectedTime
+            ));
         }
-
-
     }
 }

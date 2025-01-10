@@ -4,8 +4,6 @@
              x:Class="RestaurantBookings.MainPage"
              Padding="10">
 
-    <StackLayout Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
-
         <Label Text="Select Date:"
                VerticalOptions="Center"
                HorizontalOptions="Center" />
@@ -31,6 +29,11 @@
                 HorizontalOptions="Center"
                 Clicked="OnBookClicked" />
 
+        <!-- View Bookings Button -->
+        <Button Text="View Your Bookings"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="OnViewBookingsClicked" />
     </StackLayout>
 
 </ContentPage>

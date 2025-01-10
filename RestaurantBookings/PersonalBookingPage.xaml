@@ -6,9 +6,9 @@
              Padding="10">
 
     <StackLayout Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Your Booking Details" 
-               FontSize="Large" 
-               FontAttributes="Bold" 
+        <Label Text="Your Booking Details"
+               FontSize="Large"
+               FontAttributes="Bold"
                HorizontalOptions="Center" />
 
         <Label Text="Date:" FontSize="Medium" />
@@ -17,8 +17,12 @@
         <Label Text="Time:" FontSize="Medium" />
         <Label x:Name="BookingTimeLabel" FontSize="Medium" />
 
+        <Button Text="Cancel Booking"
+                IsVisible="{Binding Source={x:Reference BookingDateLabel}, Path=Text, Converter={StaticResource NullOrEmptyToVisibilityConverter}}"
+                Clicked="OnCancelBookingClicked" />
+
         <Button Text="Back to Home"
                 Clicked="OnBackToHomeClicked" />
     </StackLayout>
-    
+
 </ContentPage>
