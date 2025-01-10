@@ -4,17 +4,17 @@ namespace RestaurantBookings
 {
     public partial class PersonalBookingPage : ContentPage
     {
-        private string v;
-        private string selectedTime;
+        private string? bookingDate;
+        private string? bookingTime; 
 
-        public PersonalBookingPage(string v = null, string selectedTime = null)
+        public PersonalBookingPage(string? bookingDate = null, string? bookingTime = null)
         {
             InitializeComponent();
-            BookingDateLabel.Text = v ?? "No booking made.";
-            BookingTimeLabel.Text = selectedTime ?? string.Empty;
+            BookingDateLabel.Text = bookingDate ?? "No booking made.";
+            BookingTimeLabel.Text = bookingTime ?? string.Empty;
 
             // Retrieve booking details from MainPage
-            var mainPage = Application.Current.MainPage as NavigationPage;
+            var mainPage = Application.Current.Windows[0].Page as NavigationPage;
             var mainPageContent = mainPage?.RootPage as MainPage;
 
             if (mainPageContent != null &&
@@ -34,16 +34,10 @@ namespace RestaurantBookings
             }
         }
 
-        public PersonalBookingPage(string v, string selectedTime)
-        {
-            this.v = v;
-            this.selectedTime = selectedTime;
-        }
-
         private async void OnCancelBookingClicked(object sender, EventArgs e)
         {
             // Retrieve booking details from MainPage
-            var mainPage = Application.Current.MainPage as NavigationPage;
+            var mainPage = Application.Current.Windows[0].Page as NavigationPage;
             var mainPageContent = mainPage?.RootPage as MainPage;
 
             if (mainPageContent != null)
