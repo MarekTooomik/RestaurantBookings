@@ -4,8 +4,8 @@ namespace RestaurantBookings
 {
     public partial class PersonalBookingPage : ContentPage
     {
-        private string? bookingDate;
-        private string? bookingTime; 
+        private string? bookingDate; // Nullable
+        private string? bookingTime; // Nullable
 
         public PersonalBookingPage(string? bookingDate = null, string? bookingTime = null)
         {
