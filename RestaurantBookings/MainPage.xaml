@@ -33,11 +33,16 @@
                 HorizontalOptions="Center"
                 Clicked="OnBookClicked" />
 
-        <!-- View Bookings Button -->
+
         <Button Text="View Your Bookings"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Clicked="OnViewBookingsClicked" />
+        
+        <Button Text="Contact Us"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="OnContactUsClicked" />
     </StackLayout>
 
 </ContentPage>

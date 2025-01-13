@@ -12,7 +12,7 @@ namespace RestaurantBookings
         {
             InitializeComponent();
 
-            // Initialize properties
+            
             SelectedDate = DateTime.Now.Date;
             SelectedTimeIndex = 0;
 
@@ -41,22 +41,21 @@ namespace RestaurantBookings
 
         private void OnDateChanged(object sender, DateChangedEventArgs e)
         {
-            SelectedDate = e.NewDate; // Update the SelectedDate property when the user picks a date
+            SelectedDate = e.NewDate; 
         }
 
         private async void OnBookClicked(object sender, EventArgs e)
         {
-            // Validate SelectedTimeIndex
+            
             if (SelectedTimeIndex < 0 || SelectedTimeIndex >= TimeOptions.Count)
             {
                 await DisplayAlert("Error", "Invalid time selection.", "OK");
                 return;
             }
 
-            // Get the selected time
             string selectedTime = TimeOptions[SelectedTimeIndex];
 
-            // Display a confirmation alert
+
             await DisplayAlert(
                 "Booking Confirmed",
                 $"Your booking for {SelectedDate.ToShortDateString()} at {selectedTime} is confirmed.",
@@ -97,6 +96,12 @@ namespace RestaurantBookings
             {
                 await DisplayAlert("Error", ex.Message, "OK");
             }
+        }
+
+        private async void OnContactUsClicked(object sender, EventArgs e)
+        {
+            // Navigate to the ContactPage
+            await Navigation.PushAsync(new ContactPage());
         }
     }
 }

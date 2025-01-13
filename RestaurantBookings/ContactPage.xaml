@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RestaurantBookings.ContactPage"
+             Title="Contact Us"
+             Padding="10">
+
+    <StackLayout Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Contact Information" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <Label Text="Phone: (123) 456-7890" FontSize="Medium" HorizontalOptions="Center" />
+        <Label Text="Email: contact@restaurant.com" FontSize="Medium" HorizontalOptions="Center" />
+        <Label Text="Address: 123 Foodie Lane, Flavor Town, FT 12345" FontSize="Medium" HorizontalOptions="Center" />
+
+        <Button Text="Back to Home" Clicked="OnBackToHomeClicked" HorizontalOptions="Center" />
+    </StackLayout>
+</ContentPage>

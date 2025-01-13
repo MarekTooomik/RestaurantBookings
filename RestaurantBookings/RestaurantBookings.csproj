@@ -65,12 +65,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="ContactPage.xaml.cs">
+	    <DependentUpon>ContactPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="PersonalBookingPage.xaml.cs">
 	    <DependentUpon>PersonalBookingPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="ContactPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PersonalBookingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
