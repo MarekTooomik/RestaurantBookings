@@ -4,33 +4,51 @@ namespace RestaurantBookings
 {
     public partial class PersonalBookingPage : ContentPage
     {
-        private string? bookingDate; // Nullable
-        private string? bookingTime; // Nullable
-
         public PersonalBookingPage(string? bookingDate = null, string? bookingTime = null)
         {
             InitializeComponent();
-            BookingDateLabel.Text = bookingDate ?? "No booking made.";
-            BookingTimeLabel.Text = bookingTime ?? string.Empty;
+            InitializeBookingDetails(bookingDate, bookingTime);
+        }
 
-            // Retrieve booking details from MainPage
-            var mainPage = Application.Current.Windows[0].Page as NavigationPage;
-            var mainPageContent = mainPage?.RootPage as MainPage;
-
-            if (mainPageContent != null &&
-                !string.IsNullOrEmpty(mainPageContent.SelectedDate.ToShortDateString()) &&
-                mainPageContent.SelectedTimeIndex >= 0)
+        private async void InitializeBookingDetails(string? bookingDate, string? bookingTime)
+        {
+            try
             {
-                string selectedDate = mainPageContent.SelectedDate.ToShortDateString();
-                string selectedTime = mainPageContent.TimeOptions[mainPageContent.SelectedTimeIndex];
+                BookingDateLabel.Text = bookingDate ?? "No booking made.";
+                BookingTimeLabel.Text = bookingTime ?? string.Empty;
 
-                BookingDateLabel.Text = selectedDate;
-                BookingTimeLabel.Text = selectedTime;
+                // Retrieve booking details from MainPage
+                var mainPage = Application.Current.Windows[0].Page as NavigationPage;
+                var mainPageContent = mainPage?.RootPage as MainPage;
+
+                if (mainPageContent != null)
+                {
+                    if (mainPageContent.SelectedTimeIndex >= 0 && mainPageContent.SelectedTimeIndex < mainPageContent.TimeOptions.Count)
+                    {
+                        string selectedDate = mainPageContent.SelectedDate.ToShortDateString();
+                        string selectedTime = mainPageContent.TimeOptions[mainPageContent.SelectedTimeIndex];
+
+                        BookingDateLabel.Text = selectedDate;
+                        BookingTimeLabel.Text = selectedTime;
+                    }
+                    else
+                    {
+                        BookingDateLabel.Text = "No booking made.";
+                        BookingTimeLabel.Text = string.Empty;
+                    }
+                }
+                else
+                {
+                    BookingDateLabel.Text = "No booking made.";
+                    BookingTimeLabel.Text = string.Empty;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                BookingDateLabel.Text = "No booking made.";
+                // Handle any exceptions that occur during initialization
+                BookingDateLabel.Text = "Error loading booking details.";
                 BookingTimeLabel.Text = string.Empty;
+                await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
             }
         }
 

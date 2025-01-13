@@ -18,7 +18,7 @@
         <Label x:Name="BookingTimeLabel" FontSize="Medium" />
 
         <Button Text="Cancel Booking"
-                IsVisible="{Binding Source={x:Reference BookingDateLabel}, Path=Text, Converter={StaticResource NullOrEmptyToVisibilityConverter}}"
+                IsVisible="{Binding Source={x:Reference BookingDateLabel}, Path=Text}"
                 Clicked="OnCancelBookingClicked" />
 
         <Button Text="Back to Home"

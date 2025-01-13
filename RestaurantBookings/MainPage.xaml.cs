@@ -46,6 +46,13 @@ namespace RestaurantBookings
 
         private async void OnBookClicked(object sender, EventArgs e)
         {
+            // Validate SelectedTimeIndex
+            if (SelectedTimeIndex < 0 || SelectedTimeIndex >= TimeOptions.Count)
+            {
+                await DisplayAlert("Error", "Invalid time selection.", "OK");
+                return;
+            }
+
             // Get the selected time
             string selectedTime = TimeOptions[SelectedTimeIndex];
 
@@ -56,20 +63,40 @@ namespace RestaurantBookings
                 "OK"
             );
 
-            // Navigate to the PersonalBookingPage with booking details
-            await Navigation.PushAsync(new PersonalBookingPage(
-                SelectedDate.ToShortDateString(),
-                selectedTime
-            ));
-        }
-        private async void OnViewBookingsClicked(object sender, EventArgs e)
-        {
-            // Navigate to the PersonalBookingPage to view bookings
-            await Navigation.PushAsync(new PersonalBookingPage(
-                SelectedDate.ToShortDateString(),
-                TimeOptions[SelectedTimeIndex]
-            ));
+            try
+            {
+                // Navigate to the PersonalBookingPage with booking details
+                await Navigation.PushAsync(new PersonalBookingPage(
+                    SelectedDate.ToShortDateString(),
+                    selectedTime
+                ));
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"An error occurred while navigating: {ex.Message}", "OK");
+            }
         }
 
+        private async void OnViewBookingsClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validate SelectedTimeIndex
+                if (SelectedTimeIndex < 0 || SelectedTimeIndex >= TimeOptions.Count)
+                {
+                    await DisplayAlert("Error", "Invalid time selection.", "OK");
+                    return;
+                }
+
+                await Navigation.PushAsync(new PersonalBookingPage(
+                    SelectedDate.ToShortDateString(),
+                    TimeOptions[SelectedTimeIndex]
+                ));
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 }
